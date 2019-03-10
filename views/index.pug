@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 Furious French Toast
+  .grid
+    each season in seasons
+      .item
+        h3= season.season
+        ul.list
+          each player, i in season.players
+            li
+              span= player.position
+              | &nbsp;|&nbsp;
+              span= player.name.full
+              | &nbsp;|&nbsp;
+              span= player.teamAbbr
+              | &nbsp;|&nbsp;
+              div(style={display: 'inline-block',})
+                div= player.stats.total
+                if (season.players[i + 1])
+                  div= player.stats.total - season.players[i + 1].stats.total
+              | &nbsp;|&nbsp;
+              span= player.stats.avg
+
