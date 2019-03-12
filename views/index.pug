@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1 Furious French Toast
+  #root
   .grid
     each season in seasons
       .item
@@ -21,4 +22,6 @@ block content
                   div= player.stats.total - season.players[i + 1].stats.total
               | &nbsp;|&nbsp;
               span= player.stats.avg
+              | &nbsp;|&nbsp;
+              span= player.stats.ab
 

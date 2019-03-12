@@ -13,6 +13,17 @@ const authRouter = require('./routes/auth');
 
 const app = express();
 
+if (process.env !== 'production') {
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config');
+  const compiler = webpack(webpackConfig);
+
+  app.use(require("webpack-dev-middleware")(compiler, {
+    publicPath: webpackConfig.output.publicPath
+  }));
+  app.use(require("webpack-hot-middleware")(compiler));
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

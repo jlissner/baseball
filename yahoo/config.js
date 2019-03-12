@@ -30,3 +30,6 @@ module.exports = {
   ],
   baseUrl: 'https://fantasysports.yahooapis.com/fantasy/v2/',
 }
+
+// other yahoo links that are good
+// https://developer.yahoo.com/fantasysports/guide/player-resource.html
