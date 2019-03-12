@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
       return _map(playerKeys, pKey => axios({
         method: 'get',
         withCredentials: true,
-        url: `${baseUrl}league/${id}/players;sort=OR;player_keys=${pKey}/stats`,
+        url: `${baseUrl}league/${id}/players;player_keys=${pKey}/stats`,
         // url: `${baseUrl}users;use_login=1/games`,
         headers: { Authorization: `Bearer ${auth.token()}`}
       }).catch(() => {}))
