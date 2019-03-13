@@ -43,8 +43,9 @@ router.get('/', async (req, res, next) => {
     const curSeasonIndex = leagues.length - 1;
     const curSeason = await getCurrentSeason({league: leagues[curSeasonIndex].id, ...req.query});
     const playerIds = _map(curSeason.players, p => p.id);
+    const pastLeagues = leagues.slice(0, curSeasonIndex);
 
-    const seasonsPromises = _flatten(_map(leagues, ({ id }) => {
+    const seasonsPromises = _flatten(_map(pastLeagues, ({ id }) => {
       const playerKeys = _map(playerIds, pId => {
         const leagueId = id.split('.')[0]
 

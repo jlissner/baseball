@@ -7,9 +7,10 @@ const initialState = {
   players: [],
 }
 
-function getPlayers() {
+function getPlayers(query) {
   return {
     type: GET_PLAYERS,
+    payload: query,
   }
 }
 
