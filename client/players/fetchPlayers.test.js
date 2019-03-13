@@ -1,4 +1,4 @@
-import fetch from './fetch';
+import fetchPlayers from './fetchPlayers';
 import axios from 'axios';
 
 jest.mock('axios', () => ({
@@ -13,7 +13,7 @@ describe('fetching players', () => {
     const expectedQueryString = '?sort=OR&position=P';
     const fullPath = `${basePath}${expectedQueryString}`;
 
-    await fetch(query);
+    await fetchPlayers(query);
 
     expect(axios.get).toHaveBeenCalledWith(fullPath);
   })

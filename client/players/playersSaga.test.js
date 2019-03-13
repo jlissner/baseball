@@ -1,23 +1,22 @@
-import { put } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { playersSaga } from './playersSaga';
 import { SET_PLAYERS } from './playersReducer';
+import fetchPlayers from './fetchPlayers';
 
 
-jest.mock('./fetch', () => jest.fn().mockResolvedValue({ test: 'players' }));
+jest.mock('./fetchPlayers', () => jest.fn().mockResolvedValue({ data: { test: 'players' }}));
 
 describe('Players Saga', () => {
   it('fetches the player and puts them in state', async () => {
-    const gen = playersSaga();
+    const gen = playersSaga('query');
     const payload = { test: 'players' };
     const expectedAction = {
       type: SET_PLAYERS,
       payload
     }
 
-    const firstVal = await gen.next().value;
-    const secondVal = gen.next(payload).value;
-
-    expect(firstVal).toEqual(payload);
-    expect(secondVal).toEqual(put(expectedAction));
+    expect(gen.next().value).toEqual(call(fetchPlayers, 'query'));
+    expect(gen.next({ data: { test: 'players' }}).value).toEqual(payload);
+    expect(gen.next(payload).value).toEqual(put(expectedAction));
   });
 })

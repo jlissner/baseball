@@ -37,7 +37,7 @@ const ACTION_HANDLER = {
   [SET_PLAYERS]: (state, action) => {
     return {
       loaded: true,
-      loaded: false,
+      loading: false,
       players: action.payload,
     }
   }
