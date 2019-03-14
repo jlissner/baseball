@@ -1,4 +1,5 @@
 import combinePlayerData from './combinePlayerData';
+import _cloneDeep from 'lodash/cloneDeep';
 
 describe('Combine Player Data', () => {
   const separateData = [{
@@ -138,5 +139,18 @@ describe('Combine Player Data', () => {
     const actual = combinePlayerData(separateData);
 
     expect(actual).toEqual(expected);
+  })
+
+  it('should handle adding of null values', () => {
+    const separateDataWithNull = _cloneDeep(separateData);
+    separateDataWithNull[1].players[0].stats.gidp = null
+
+    const expectedWithNull = _cloneDeep(aggrigatedData);
+    expectedWithNull[0].statsTotals.gidp = 5;
+    expectedWithNull[0].seasons[1].stats.gidp = null;
+
+    const actual = combinePlayerData(separateDataWithNull);
+
+    expect(actual).toEqual(expectedWithNull);
   })
 })

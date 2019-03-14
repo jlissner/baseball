@@ -18,7 +18,7 @@ function combinePlayerData(playersBySeason) {
 
         _transform(player.stats, (cur, val, key) => {
           cur[key] = cur[key] || 0;
-          cur[key] = _round(cur[key] + val, 3);
+          cur[key] = _round(cur[key] + (val || 0), 3);
         }, existingPlayer.statsTotals)
       } else {
         res.push({

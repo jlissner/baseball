@@ -89,20 +89,23 @@ function BatterBody({season, stats}) {
 
 export default function Player({
   name,
-  statsTotals: {
+  statsTotals,
+  seasons
+}) {
+  const {
     total,
     ab,
     ip,
-  },
-  seasons
-}) {
+  } = statsTotals;
   const isPitcher = Boolean(ip);
   const den = isPitcher ? ip : ab
+
+  console.log({name, statsTotals, seasons})
 
   return (
     <Card>
       <CardContent>
-        <Typography variant='h5'>{name} - {_round(total / den, 2)}</Typography>
+        <Typography variant='h5'>{name} - {_round(total / (den || 1), 2)}</Typography>
       </CardContent>
       <Table>
         {
