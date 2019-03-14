@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import _map from 'lodash/map';
 import Player from './Player'
+import Filters from '../filters/FilterContainer'
 
 function Players({ players, getPlayers }) {
   const { loaded, loading } = players;
@@ -17,13 +18,18 @@ function Players({ players, getPlayers }) {
   }
 
   return (
-    _map(players.players, (player, i) => (
-      <Player
-        key={player.id}
-        {...player}
-        nextPlayer={players.players[i+1]}
-      />
-    ))
+    <React.Fragment>
+      <Filters />
+      {
+        _map(players.players, (player, i) => (
+          <Player
+            key={player.id}
+            {...player}
+            nextPlayer={players.players[i+1]}
+          />
+        ))
+      }
+    </React.Fragment>
   )
 }
 
