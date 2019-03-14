@@ -7,7 +7,7 @@ const _transform = require('lodash/transform');
 const _cloneDeep = require('lodash/cloneDeep');
 
 function combinePlayerData(playersBySeason) {
-  const combined = _transform(playersBySeason, (res, { players, season }) => {
+  return _transform(playersBySeason, (res, { players, season }) => {
     _forEach(players, player => {
       const existingPlayerId = _findIndex(res, { id: player.id });
 
@@ -19,24 +19,17 @@ function combinePlayerData(playersBySeason) {
         _transform(player.stats, (cur, val, key) => {
           cur[key] = cur[key] || 0;
           cur[key] = _round(cur[key] + val, 3);
-        }, existingPlayer.averageStats)
+        }, existingPlayer.statsTotals)
       } else {
         res.push({
           ..._pick(player, ['id', 'position']),
           name: player.name.full,
           seasons: [{season, stats: player.stats}],
-          averageStats: _cloneDeep(player.stats),
+          statsTotals: _cloneDeep(player.stats),
         })
       }
     })
   }, [])
-
-  return _map(combined, player => ({
-    ...player,
-    averageStats: _transform(player.averageStats, (res, val, key) => {
-      res[key] = val / player.seasons.length
-    }, {})
-  }))
 }
 
 module.exports = combinePlayerData

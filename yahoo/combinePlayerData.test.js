@@ -115,22 +115,22 @@ describe('Combine Player Data', () => {
       }
     }],
     position: 'OF',
-    averageStats: {
-      h: 148,
-      ab: 472,
-      avg: .314,
-      r: 102,
-      '2b': 25,
-      '3b': 5,
-      hr: 40,
-      rbi: 80,
-      sf: 5,
-      sb: 25,
-      bb: 123,
-      ibb: 26,
-      gidp: 6,
-      cyc: 1,
-      total: 769,
+    statsTotals: {
+      h: 296,
+      ab: 944,
+      avg: .628,
+      r: 204,
+      '2b': 50,
+      '3b': 10,
+      hr: 80,
+      rbi: 160,
+      sf: 10,
+      sb: 50,
+      bb: 246,
+      ibb: 52,
+      gidp: 12,
+      cyc: 2,
+      total: 1538,
       }
   }]
   it('should aggrigate all the player data', () => {

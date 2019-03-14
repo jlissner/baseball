@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { playersSaga } from './playersSaga';
-import { SET_PLAYERS } from './playersReducer';
+import { GET_PLAYERS, SET_PLAYERS } from './playersReducer';
 import fetchPlayers from './fetchPlayers';
 
 
@@ -8,7 +8,7 @@ jest.mock('./fetchPlayers', () => jest.fn().mockResolvedValue({ data: { test: 'p
 
 describe('Players Saga', () => {
   it('fetches the player and puts them in state', async () => {
-    const gen = playersSaga('query');
+    const gen = playersSaga({ type: GET_PLAYERS, payload:  'query'});
     const payload = { test: 'players' };
     const expectedAction = {
       type: SET_PLAYERS,

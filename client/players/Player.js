@@ -35,16 +35,16 @@ function PitcherBody({season, stats}) {
   return (
     <TableRow>
       <TableCell>{season}</TableCell>
-      <TableCell>{stats.total}</TableCell>
-      <TableCell>{era}</TableCell>
-      <TableCell>{stats.ip}</TableCell>
-      <TableCell>{stats.er}</TableCell>
-      <TableCell>{stats.k}</TableCell>
-      <TableCell>{stats.qs}</TableCell>
-      <TableCell>{stats.cg}</TableCell>
-      <TableCell>{stats.w}</TableCell>
-      <TableCell>{stats.sv}</TableCell>
-      <TableCell>{stats.l}</TableCell>
+      <TableCell>{stats.total || '-'}</TableCell>
+      <TableCell>{era || '-'}</TableCell>
+      <TableCell>{stats.ip || '-'}</TableCell>
+      <TableCell>{stats.er || '-'}</TableCell>
+      <TableCell>{stats.k || '-'}</TableCell>
+      <TableCell>{stats.qs || '-'}</TableCell>
+      <TableCell>{stats.cg || '-'}</TableCell>
+      <TableCell>{stats.w || '-'}</TableCell>
+      <TableCell>{stats.sv || '-'}</TableCell>
+      <TableCell>{stats.l || '-'}</TableCell>
     </TableRow>
   )
 }
@@ -57,6 +57,7 @@ function BatterHead() {
         <TableCell>Total</TableCell>
         <TableCell>AVG</TableCell>
         <TableCell>H</TableCell>
+        <TableCell>AB</TableCell>
         <TableCell>RBI</TableCell>
         <TableCell>2B</TableCell>
         <TableCell>3B</TableCell>
@@ -72,36 +73,36 @@ function BatterBody({season, stats}) {
   return (
     <TableRow>
       <TableCell>{season}</TableCell>
-      <TableCell>{stats.total}</TableCell>
-      <TableCell>{stats.avg}</TableCell>
-      <TableCell>{stats.h}</TableCell>
-      <TableCell>{stats.rbi}</TableCell>
-      <TableCell>{stats['2b']}</TableCell>
-      <TableCell>{stats['3b']}</TableCell>
-      <TableCell>{stats.hr}</TableCell>
-      <TableCell>{stats.bb}</TableCell>
-      <TableCell>{stats.ibb}</TableCell>
+      <TableCell>{stats.total || '-'}</TableCell>
+      <TableCell>{stats.avg || '-'}</TableCell>
+      <TableCell>{stats.h || '-'}</TableCell>
+      <TableCell>{stats.ab || '-'}</TableCell>
+      <TableCell>{stats.rbi || '-'}</TableCell>
+      <TableCell>{stats['2b'] || '-'}</TableCell>
+      <TableCell>{stats['3b'] || '-'}</TableCell>
+      <TableCell>{stats.hr || '-'}</TableCell>
+      <TableCell>{stats.bb || '-'}</TableCell>
+      <TableCell>{stats.ibb || '-'}</TableCell>
     </TableRow>
   )
 }
 
 export default function Player({
   name,
-  averageStats: {
-    h,
+  statsTotals: {
+    total,
     ab,
-    avg,
     ip,
-    er,
   },
   seasons
 }) {
   const isPitcher = Boolean(ip);
+  const den = isPitcher ? ip : ab
 
   return (
     <Card>
       <CardContent>
-        <Typography variant='h5'>{name}</Typography>
+        <Typography variant='h5'>{name} - {_round(total / den, 2)}</Typography>
       </CardContent>
       <Table>
         {

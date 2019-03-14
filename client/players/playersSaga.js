@@ -2,8 +2,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { GET_PLAYERS, SET_PLAYERS } from './playersReducer';
 import fetchPlayers from './fetchPlayers';
 
-export function* playersSaga(query) {
-  const res = yield call(fetchPlayers, query);
+export function* playersSaga({ payload }) {
+  const res = yield call(fetchPlayers, payload);
   const players = yield res.data
 
   yield put({
