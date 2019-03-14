@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import FilledInput from '@material-ui/core/FilledInput';
 
 function Filters({ getPlayers }) {
   const [position, setPosition] = useState('A')
 
   return (
-    <Grid container>
-      <Grid item>
+    <Grid container spacing={24}>
+      <Grid item xs={3}>
         <Select
           value={position}
           onChange={(evt) => {
@@ -16,6 +17,9 @@ function Filters({ getPlayers }) {
             setPosition(newPosition);
             getPlayers({ position: newPosition });
           }}
+          fullWidth
+          margin="none"
+          input={<FilledInput margin="none" />}
         >
           <MenuItem value={'A'}>All</MenuItem>
           <MenuItem value={'B'}>All Batters</MenuItem>

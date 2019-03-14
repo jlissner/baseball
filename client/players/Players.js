@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 import _map from 'lodash/map';
 import Player from './Player'
 import Filters from '../filters/FilterContainer'
@@ -18,13 +19,18 @@ function Players({ players, getPlayers }) {
   }
 
   return (
-    _map(players.players, (player, i) => (
-      <Player
-        key={player.id}
-        {...player}
-        nextPlayer={players.players[i+1]}
-      />
-    ))
+    <Grid container spacing={24}>
+      {
+        _map(players.players, (player, i) => (
+          <Grid key={player.id} item xs={12}>
+            <Player
+              {...player}
+              nextPlayer={players.players[i+1]}
+            />
+          </Grid>
+        ))
+      }
+    </Grid>
   )
 }
 

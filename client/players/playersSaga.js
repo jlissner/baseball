@@ -13,6 +13,5 @@ export function* playersSaga({ payload }) {
 }
 
 export default function* watchPlayersSaga() {
-  console.log('called watch players sagas')
   yield takeEvery(GET_PLAYERS, playersSaga);
 }
