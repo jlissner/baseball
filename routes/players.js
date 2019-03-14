@@ -3,6 +3,7 @@ const auth = require('../auth/auth');
 const express = require('express');
 const { baseUrl, leagues } = require('../yahoo/config');
 const parsePlayerData = require('../yahoo/parsePlayerData');
+const combinePlayerData = require('../yahoo/combinePlayerData');
 const { parseString } = require('xml2js');
 const _get = require('lodash/get');
 const _map = require('lodash/map');
@@ -36,8 +37,6 @@ async function getCurrentSeason(opts) {
   return await parsePlayerData(curSeasonRaw);
 }
 
-
-
 router.get('/', async (req, res, next) => {
   try {
     const curSeasonIndex = leagues.length - 1;
@@ -70,8 +69,10 @@ router.get('/', async (req, res, next) => {
         players: _flatten(_map(parsedPlayerData.filter(s => s.season === season), sp => sp.players)),
       }
     })
+    const sortedPlayers = _sortBy(groupedPlayerData, ({ season }) => season).reverse();
+    const combinedPlayers = combinePlayerData(sortedPlayers);
 
-    res.send(_sortBy(groupedPlayerData, ({ season }) => season));
+    res.send(combinedPlayers);
   } catch (err) {
     console.error(err)
     res.send(err);

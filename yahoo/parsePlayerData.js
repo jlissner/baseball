@@ -39,6 +39,16 @@ const statsMap = {
   '19': 'ibb',
   '22': 'gidp',
   '64': 'cyc',
+  '50': 'ip',
+  '28': 'w',
+  '29': 'l',
+  '30': 'cg',
+  '32': 'sv',
+  '37': 'er',
+  '42': 'k',
+  '79': 'nh',
+  '80': 'pg',
+  '83': 'qs',
 }
 
 function parseStats(stats, _total) {
