@@ -18,18 +18,13 @@ function Players({ players, getPlayers }) {
   }
 
   return (
-    <React.Fragment>
-      <Filters />
-      {
-        _map(players.players, (player, i) => (
-          <Player
-            key={player.id}
-            {...player}
-            nextPlayer={players.players[i+1]}
-          />
-        ))
-      }
-    </React.Fragment>
+    _map(players.players, (player, i) => (
+      <Player
+        key={player.id}
+        {...player}
+        nextPlayer={players.players[i+1]}
+      />
+    ))
   )
 }
 
